@@ -5,10 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { PokemonListComponent } from '../../features/pokemons/components/pokemon-list/pokemon-list.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [PokemonListComponent],
   standalone: true,
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

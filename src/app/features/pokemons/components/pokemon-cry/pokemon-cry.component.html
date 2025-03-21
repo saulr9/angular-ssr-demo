@@ -1,0 +1,10 @@
+<div class="flex justify-center">
+  <button
+    (click)="playCry()"
+    class="px-4 py-2 rounded flex items-center"
+    [disabled]="isLoading()"
+  >
+    <span *ngIf="!isLoading()" class="material-icons">play_arrow</span>
+    <span *ngIf="isLoading()" class="material-icons animate-spin">sync</span>
+  </button>
+</div>

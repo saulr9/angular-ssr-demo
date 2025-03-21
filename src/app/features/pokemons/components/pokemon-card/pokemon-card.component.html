@@ -1,0 +1,17 @@
+<article class="pokemon-item p-4 border rounded shadow-lg bg-white relative">
+  <div class="flex justify-center absolute top-0 right-0">
+    <app-pokemon-cry [cryUrl]="pokemon.cries.latest"></app-pokemon-cry>
+  </div>
+  <img
+    src="{{ pokemon.sprites.other?.['official-artwork']?.front_default }}"
+    alt="{{ pokemon.name }}"
+    class="mb-2 w-full h-auto object-cover rounded"
+  />
+  <h3 class="text-xl font-semibold capitalize text-center">
+    {{ pokemon.name }}
+  </h3>
+  <p class="text-gray-600 text-center">
+    Type: {{ pokemon.types[0].type.name }}
+  </p>
+  <p class="text-gray-600 text-center">Level: {{ pokemon.base_experience }}</p>
+</article>
