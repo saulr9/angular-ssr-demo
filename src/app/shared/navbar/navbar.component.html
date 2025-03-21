@@ -8,9 +8,13 @@
     />
     <div>
       <ng-container *ngFor="let route of menuRoutes">
-        <a mat-button [routerLink]="route.path" class="!capitalize">{{
-          route.displayName
-        }}</a>
+        <a
+          mat-button
+          routerLinkActive="!underline"
+          [routerLink]="route.path"
+          class="!capitalize"
+          >{{ route.displayName }}</a
+        >
       </ng-container>
     </div>
   </div>
