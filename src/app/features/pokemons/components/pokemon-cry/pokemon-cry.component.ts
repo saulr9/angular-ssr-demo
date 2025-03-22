@@ -2,10 +2,13 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  inject,
+  input,
   signal,
 } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { sleep } from '../../../../shared/utils/sleep';
+import { PokemonService } from '../../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-cry',
@@ -14,17 +17,32 @@ import { sleep } from '../../../../shared/utils/sleep';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PokemonCryComponent {
-  @Input({
-    required: true,
-  })
-  cryUrl!: string;
+  cryUrl = input<string | null>(null);
+  pokemonId = input<string | null>(null);
 
+  cryUrlSignal = signal<string>('');
   isLoading = signal(false);
+
+  pokemonService = inject(PokemonService);
 
   async playCry() {
     this.isLoading.set(true);
     await sleep(200);
-    const audio = new Audio(this.cryUrl);
+
+    if (!this.cryUrl() && !this.pokemonId()) {
+      this.isLoading.set(false);
+      return;
+    }
+
+    if (this.cryUrl) {
+      this.cryUrlSignal.set(this.cryUrl()!);
+    }
+
+    if (this.pokemonId) {
+      await this.getPokemonCryById(this.pokemonId()!);
+    }
+
+    const audio = new Audio(this.cryUrlSignal());
     audio.oncanplaythrough = () => {
       this.isLoading.set(false);
       audio.play();
@@ -36,5 +54,12 @@ export class PokemonCryComponent {
       this.isLoading.set(false);
       alert('Failed to load the cry sound.');
     };
+  }
+
+  async getPokemonCryById(pokemonId: string) {
+    const pokemon = await firstValueFrom(
+      this.pokemonService.getPokemonById(pokemonId)
+    );
+    this.cryUrlSignal.set(pokemon.cries.latest);
   }
 }

@@ -4,8 +4,9 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
-import { Pokemon } from '../../interfaces/pokemon';
+import { SimplePokemon } from '../../interfaces/pokemons';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
@@ -16,16 +17,16 @@ import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PokemonListComponent implements OnInit {
-  pokemons: Pokemon[] = [];
+  pokemons = signal<SimplePokemon[]>([]);
   pokemonService = inject(PokemonService);
 
   ngOnInit(): void {
-    this.pokemonService.getPokemons().subscribe((data) => {
-      data.results.forEach((pokemon) => {
-        this.pokemonService.getPokemonByName(pokemon.name).subscribe((data) => {
-          this.pokemons.push(data);
-        });
-      });
+    this.getPokemons();
+  }
+
+  getPokemons() {
+    this.pokemonService.getPokemons().subscribe((pokemons) => {
+      this.pokemons.set(pokemons);
     });
   }
 }

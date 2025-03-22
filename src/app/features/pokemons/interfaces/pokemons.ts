@@ -1,11 +1,17 @@
-export interface AllPokemons {
+export interface PokemonsAPIResponse {
   count: number;
   next: string;
   previous: null;
-  results: AllPokemonResult[];
+  results: PokemonsAPIResponseResult[];
 }
 
-export interface AllPokemonResult {
+export interface PokemonsAPIResponseResult {
+  name: string;
+  url: string;
+}
+
+export interface SimplePokemon {
+  id: string;
   name: string;
   url: string;
 }

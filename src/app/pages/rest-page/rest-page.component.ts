@@ -5,10 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { PokemonListComponent } from '../../features/pokemons/components/pokemon-list/pokemon-list.component';
 
 @Component({
   selector: 'app-rest-page',
-  imports: [],
+  imports: [PokemonListComponent],
   templateUrl: './rest-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
