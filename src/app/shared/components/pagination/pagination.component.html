@@ -1,0 +1,17 @@
+<div class="pagination">
+  <button
+    mat-button
+    (click)="onPageChange(currentPage - 1)"
+    [disabled]="currentPage === 1"
+  >
+    Previous
+  </button>
+  <span class="text-sm mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button
+    mat-button
+    (click)="onPageChange(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+  >
+    Next
+  </button>
+</div>

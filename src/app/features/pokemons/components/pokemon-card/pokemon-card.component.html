@@ -1,4 +1,6 @@
-<article class="pokemon-item p-4 border rounded shadow-lg bg-white relative">
+<article
+  class="pokemon-item p-4 border rounded-lg shadow-lg bg-white relative cursor-pointer"
+>
   <div
     class="font-semibold rounded-full px-2 py-1 absolute top-0 left-0 text-2xl"
   >
@@ -7,11 +9,7 @@
   <div class="flex justify-center absolute top-0 right-0">
     <app-pokemon-cry [pokemonId]="pokemon.id"></app-pokemon-cry>
   </div>
-  <img
-    [src]="pokemonImageUrl()"
-    alt="{{ pokemon.name }}"
-    class="mb-2 w-full h-auto object-cover rounded"
-  />
+  <app-pokemon-image [pokemonId]="pokemon.id"></app-pokemon-image>
   <h3 class="text-xl font-semibold capitalize text-center">
     {{ pokemon.name }}
   </h3>

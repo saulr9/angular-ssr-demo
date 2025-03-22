@@ -1,0 +1,14 @@
+<img
+  [src]="pokemonImageUrl()"
+  alt="{{ pokemonId() }}"
+  class="mb-2 w-full h-auto object-cover rounded"
+  (error)="onImageError($event)"
+  (load)="onImageLoad()"
+  [hidden]="isLoading()"
+/>
+<img
+  src="images/fallback.jpg"
+  alt="Loading..."
+  class="mb-2 w-full h-auto object-cover rounded"
+  *ngIf="isLoading()"
+/>

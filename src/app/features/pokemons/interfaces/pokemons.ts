@@ -10,6 +10,14 @@ export interface PokemonsAPIResponseResult {
   url: string;
 }
 
+export interface PokemonsResponse {
+  count: number;
+  next: string;
+  previous: null;
+  totalPages: number;
+  results: SimplePokemon[];
+}
+
 export interface SimplePokemon {
   id: string;
   name: string;
