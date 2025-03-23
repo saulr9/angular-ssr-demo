@@ -1,0 +1,14 @@
+/pokemons/page/1
+/pokemons/page/2
+/pokemons/page/3
+/pokemons/page/4
+/pokemons/page/5
+/pokemon/bulbasaur
+/pokemon/ivysaur
+/pokemon/venusaur
+/pokemon/charmander
+/pokemon/charmeleon
+/pokemon/charizard
+/pokemon/squirtle
+/pokemon/wartortle
+/pokemon/blastoise
