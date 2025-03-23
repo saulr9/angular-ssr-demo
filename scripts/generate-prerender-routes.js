@@ -51,4 +51,4 @@ async function generateRoutes() {
   }
 }
 
-generateRoutes();
+await generateRoutes();
