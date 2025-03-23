@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 
-const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=10000";
+const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=151"; // Limitar a los primeros 151 Pokémon
 const timeout = 5000; // 5 seconds timeout for each request
 
 async function generateRoutes() {
@@ -12,7 +12,7 @@ async function generateRoutes() {
 
     const validPokemons = pokemons.filter((pokemon) => {
       const id = parseInt(pokemon.url.split("/").slice(-2, -1)[0], 10);
-      return id <= 10000; // Assuming 10000 is the maximum valid ID
+      return id <= 151; // Limitar a los primeros 151 Pokémon
     });
 
     const routes = [];
@@ -25,7 +25,7 @@ async function generateRoutes() {
     }
 
     const paginatedRoutes = Array.from(
-      { length: Math.ceil(validPokemons.length / 20) },
+      { length: Math.min(10, Math.ceil(validPokemons.length / 20)) }, // Limitar a las primeras 10 páginas
       (_, i) => `/pokemons/page/${i + 1}`
     );
 
@@ -51,4 +51,4 @@ async function generateRoutes() {
   }
 }
 
-await generateRoutes();
+generateRoutes();
