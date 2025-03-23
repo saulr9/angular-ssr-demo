@@ -13,4 +13,8 @@ export const routes: Routes = [
     path: 'graphql',
     loadComponent: () => import('./pages/graphql-page/graphql-page.component'),
   },
+  {
+    path: 'pokemon/:name',
+    loadComponent: () => import('./pages/pokemon-page/pokemon-page.component'),
+  },
 ];

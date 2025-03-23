@@ -2,8 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   Input,
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { leadZeroId } from '../../../../shared/utils/lead-zero-id';
 import { SimplePokemon } from '../../interfaces/pokemons';
 import { PokemonCryComponent } from '../pokemon-cry/pokemon-cry.component';
 import { PokemonImageComponent } from '../pokemon-image/pokemon-image.component';
@@ -19,8 +22,14 @@ export class PokemonCardComponent {
     required: true,
   })
   pokemon!: SimplePokemon;
+  private router = inject(Router);
 
   pokemonLeadId = computed(() => {
-    return this.pokemon.id.toString().padStart(3, '0');
+    return leadZeroId(this.pokemon.id.toString());
   });
+
+  navigateToPokemon() {
+    console.log('Navigate to pokemon', this.pokemon.name);
+    this.router.navigate(['/pokemon', this.pokemon.name]);
+  }
 }

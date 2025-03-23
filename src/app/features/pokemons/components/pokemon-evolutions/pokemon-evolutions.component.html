@@ -1,0 +1,9 @@
+@if (evolutions().length > 1){
+
+<h2 class="text-3xl text-center font-semibold mb-4">Evolution Chain</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+  <div *ngFor="let pokemon of evolutions()">
+    <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+  </div>
+</div>
+}

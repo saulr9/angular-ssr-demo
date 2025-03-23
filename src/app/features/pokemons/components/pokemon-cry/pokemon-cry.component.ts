@@ -34,11 +34,11 @@ export class PokemonCryComponent {
       return;
     }
 
-    if (this.cryUrl) {
+    if (this.cryUrl()) {
       this.cryUrlSignal.set(this.cryUrl()!);
     }
 
-    if (this.pokemonId) {
+    if (this.pokemonId() && !this.cryUrl()) {
       await this.getPokemonCryById(this.pokemonId()!);
     }
 

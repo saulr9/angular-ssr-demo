@@ -10,7 +10,7 @@
       <ng-container *ngFor="let route of menuRoutes">
         <a
           mat-button
-          routerLinkActive="!underline"
+          routerLinkActive="underline"
           [routerLink]="route.path"
           class="!capitalize"
           >{{ route.displayName }}</a

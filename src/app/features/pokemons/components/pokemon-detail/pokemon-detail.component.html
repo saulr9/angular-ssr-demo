@@ -1,0 +1,29 @@
+@let currentPokemon = pokemon();
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+  <div
+    class="flex flex-col items-center rounded-lg relative"
+    [ngClass]="bgByType()"
+  >
+    <app-pokemon-cry
+      class="absolute top-0 right-0 text-white"
+      [cryUrl]="currentPokemon.cries.latest"
+    ></app-pokemon-cry>
+    <img
+      [src]="currentPokemon.sprites.other?.['official-artwork']?.front_default"
+      [alt]="currentPokemon.name"
+      class="w-full"
+    />
+  </div>
+  <div class="flex flex-col">
+    <div class="flex flex-row">
+      <h1 class="text-3xl font-bold capitalize">
+        {{ pokemonLeadId() }} {{ currentPokemon.name }}
+      </h1>
+    </div>
+  </div>
+</div>
+
+<app-pokemon-evolutions
+  [pokemonId]="currentPokemon.id"
+></app-pokemon-evolutions>
