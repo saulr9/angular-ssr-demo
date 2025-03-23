@@ -5,7 +5,6 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { PokemonDetailComponent } from '../../features/pokemons/components/pokemon-detail/pokemon-detail.component';
@@ -25,8 +24,6 @@ export default class PokemonPageComponent implements OnInit {
   private router = inject(Router);
   private pokemonService = inject(PokemonService);
   private seoService = inject(SeoService);
-  private title = inject(Title);
-  private meta = inject(Meta);
 
   ngOnInit(): void {
     this.getPokemonByName();

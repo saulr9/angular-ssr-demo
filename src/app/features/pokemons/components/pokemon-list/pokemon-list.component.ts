@@ -33,9 +33,9 @@ export class PokemonListComponent implements OnInit {
   router = inject(Router);
 
   public currentPage = toSignal(
-    this.route.queryParamMap.pipe(
+    this.route.params.pipe(
       map((params) => {
-        return params.get('page') ?? 1;
+        return params['page'] ?? 1;
       }),
       map((page) => (isNaN(+page) ? 1 : +page)),
       map((page) => Math.max(1, page))
@@ -54,10 +54,12 @@ export class PokemonListComponent implements OnInit {
   }
 
   onPageChange(page: number) {
-    this.router.navigate([], {
+    /*     this.router.navigate([], {
       queryParams: { page },
       queryParamsHandling: 'merge',
-    });
+    }); */
+
+    this.router.navigate(['/pokemons/page', page]);
     this.title.setTitle(`Pokemons - Page ${page}`);
     this.getPokemons(page);
   }
