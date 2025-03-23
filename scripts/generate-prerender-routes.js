@@ -9,9 +9,15 @@ async function generateRoutes() {
     const response = await axios.get(apiUrl);
     const pokemons = response.data.results;
 
-    const routes = pokemons.map((pokemon) => `/pokemon/${pokemon.name}`);
+    // Filter out invalid Pokémon IDs
+    const validPokemons = pokemons.filter((pokemon) => {
+      const id = parseInt(pokemon.url.split("/").slice(-2, -1)[0], 10);
+      return id <= 10000; // Assuming 10000 is the maximum valid ID
+    });
+
+    const routes = validPokemons.map((pokemon) => `/pokemon/${pokemon.name}`);
     const paginatedRoutes = Array.from(
-      { length: Math.ceil(pokemons.length / 20) },
+      { length: Math.ceil(validPokemons.length / 20) },
       (_, i) => `/pokemons/page/${i + 1}`
     );
 
@@ -31,6 +37,9 @@ async function generateRoutes() {
         console.log("routes.txt generated successfully.");
       }
     });
+
+    // Log the generated routes for debugging
+    console.log("Generated routes:", allRoutes);
   } catch (error) {
     console.error("Error fetching Pokémon data:", error);
   }
