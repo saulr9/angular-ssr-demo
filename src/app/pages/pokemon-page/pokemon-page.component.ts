@@ -26,7 +26,9 @@ export default class PokemonPageComponent implements OnInit {
   private seoService = inject(SeoService);
 
   ngOnInit(): void {
-    this.getPokemonByName();
+    this.route.params.subscribe(() => {
+      this.getPokemonByName();
+    });
   }
 
   private getPokemonByName() {

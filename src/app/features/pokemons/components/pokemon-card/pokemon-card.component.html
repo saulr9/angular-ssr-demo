@@ -7,11 +7,11 @@
   >
     {{ pokemonLeadId() }}
   </div>
-  <div class="flex justify-center absolute top-0 right-0 z-50">
-    <app-pokemon-cry
-      [pokemonId]="pokemon.id"
-      (click)="$event.stopPropagation()"
-    ></app-pokemon-cry>
+  <div
+    class="flex justify-center absolute top-0 right-0 z-50"
+    (click)="$event.stopPropagation()"
+  >
+    <app-pokemon-cry [pokemonId]="pokemon.id"></app-pokemon-cry>
   </div>
   <app-pokemon-image [pokemonId]="pokemon.id"></app-pokemon-image>
   <h3 class="text-xl font-semibold capitalize text-center">

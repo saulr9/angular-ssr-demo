@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import PokemonPageComponent from './pages/pokemon-page/pokemon-page.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'pokemon/:name',
-    loadComponent: () => import('./pages/pokemon-page/pokemon-page.component'),
+    component: PokemonPageComponent,
   },
   {
     path: '**',
