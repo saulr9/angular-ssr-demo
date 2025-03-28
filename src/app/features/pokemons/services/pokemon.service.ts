@@ -19,6 +19,7 @@ import {
 })
 export class PokemonService {
   private apiUrl = 'https://pokeapi.co/api/v2';
+  private readonly STORAGE_CAUGHT_POKEMONS_KEY = 'caughtPokemons';
 
   constructor(private http: HttpClient) {}
 
@@ -91,6 +92,38 @@ export class PokemonService {
         return simplePokemons;
       })
     );
+  }
+
+  public addCaughtPokemon(pokemonId: string): void {
+    const caughtPokemons = this.getCaughtPokemons();
+    if (!caughtPokemons.includes(pokemonId)) {
+      caughtPokemons.push(pokemonId);
+      localStorage.setItem(
+        this.STORAGE_CAUGHT_POKEMONS_KEY,
+        JSON.stringify(caughtPokemons)
+      );
+    }
+  }
+
+  public removeCaughtPokemon(pokemonId: string): void {
+    const caughtPokemons = this.getCaughtPokemons().filter(
+      (id) => id !== pokemonId
+    );
+    localStorage.setItem(
+      this.STORAGE_CAUGHT_POKEMONS_KEY,
+      JSON.stringify(caughtPokemons)
+    );
+  }
+
+  public isPokemonCaught(pokemonId: string): boolean {
+    return this.getCaughtPokemons().includes(pokemonId);
+  }
+
+  public getCaughtPokemons(): string[] {
+    const storedPokemons = localStorage.getItem(
+      this.STORAGE_CAUGHT_POKEMONS_KEY
+    );
+    return storedPokemons ? JSON.parse(storedPokemons) : [];
   }
 
   private extractEvolutions(chain: Chain, simplePokemons: SimplePokemon[]) {

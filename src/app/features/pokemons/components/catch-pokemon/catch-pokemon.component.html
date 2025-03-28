@@ -1,0 +1,12 @@
+<img
+  [src]="pokeballImageUrl()"
+  alt="Pokeball"
+  width="40"
+  height="40"
+  class="cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110"
+  [ngClass]="{
+    grayscale: !isCaught(),
+    'animate-bounce-once': isCaught()
+  }"
+  (click)="catchPokemon()"
+/>

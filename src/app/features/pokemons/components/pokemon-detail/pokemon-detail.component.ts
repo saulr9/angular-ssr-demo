@@ -11,9 +11,18 @@ import { Pokemon } from '../../interfaces/pokemon';
 import { PokemonCryComponent } from '../pokemon-cry/pokemon-cry.component';
 import { PokemonEvolutionsComponent } from '../pokemon-evolutions/pokemon-evolutions.component';
 
+import { MatChipsModule } from '@angular/material/chips';
+import { CatchPokemonComponent } from '../catch-pokemon/catch-pokemon.component';
+
 @Component({
   selector: 'app-pokemon-detail',
-  imports: [NgClass, PokemonCryComponent, PokemonEvolutionsComponent],
+  imports: [
+    NgClass,
+    PokemonCryComponent,
+    PokemonEvolutionsComponent,
+    MatChipsModule,
+    CatchPokemonComponent,
+  ],
   templateUrl: './pokemon-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,5 +45,9 @@ export class PokemonDetailComponent {
       return BgByType(typeName);
     }
     return BgByTypes.default;
+  });
+
+  public firstMoves = computed(() => {
+    return this.pokemon().moves.slice(0, 5);
   });
 }

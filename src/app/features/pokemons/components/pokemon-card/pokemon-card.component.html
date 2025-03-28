@@ -17,4 +17,12 @@
   <h3 class="text-xl font-semibold capitalize text-center">
     {{ pokemon.name }}
   </h3>
+
+  <div
+    class="absolute bottom-4 right-4 z-50"
+    (click)="$event.stopPropagation()"
+    *ngIf="showCatchPokemon()"
+  >
+    <app-catch-pokemon pokemonId="{{ pokemon.id }}"></app-catch-pokemon>
+  </div>
 </article>
