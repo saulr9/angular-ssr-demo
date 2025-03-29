@@ -1,59 +1,132 @@
-# Pokemon
+# Pokémon Angular Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.2.
+This documentation provides essential information for developers working on the Pokémon Angular application. The project is built using Angular CLI, Tailwind CSS, and Angular Material.
 
-## Development server
+![alt text](image.png)
 
-To start a local development server, run:
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Development Server](#development-server)
+- [Building](#building)
+- [Server-Side Rendering (SSR)](#server-side-rendering-ssr)
+- [Tailwind CSS](#tailwind-css)
+- [Generating Prerender Routes](#generating-prerender-routes)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Additional Resources](#additional-resources)
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (recommended version: 18.x or higher)
+- [Angular CLI](https://angular.dev/tools/cli) version 19.1.2 or higher
+
+Install Angular CLI globally:
+
+```bash
+npm install -g @angular/cli
+
+```
+
+## Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd pokemon
+npm install
+```
+
+## Development Server
+
+Run the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+Open your browser and navigate to `http://localhost:4200/` to view the application.
 
 ## Building
 
-To build the project run:
+build the application for production:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the dist/pokemon directory.
 
-## Running unit tests
+## Server-Side Rendering (SSR)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To build and serve the application with SSR:
+
+```bash
+npm run serve:ssr:pokemon
+```
+
+## Tailwind CSS
+
+The project uses Tailwind CSS for styling. Configuration is located in tailwind.config.js:
+
+```javascript
+module.exports = {
+  content: ["./src/**/*.{html,ts}"],
+  theme: {
+    extend: {
+      animation: {
+        "bounce-once": "bounce 1s ease-in-out 1",
+        "spin-once": "spin 1s linear 1",
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+## Generating Prerender Routes
+
+To generate prerender routes, use the following command:
+
+```bash
+npm run generate:routes
+```
+
+This script generates a routes.txt file containing routes for prerendering.
+
+## Testing
+
+### Unit Tests
+
+Run unit tests using Karma:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+pokemon/
+├── public/                 # Static assets (favicon, images)
+├── scripts/                # Utility scripts (e.g., generate-prerender-routes.js)
+├── src/
+│   ├── app/                # Angular components, services, modules
+│   ├── [index.html](http://_vscodecontentref_/1)          # Main HTML file
+│   ├── main.ts             # Application entry point
+│   ├── main.server.ts      # SSR entry point
+│   ├── server.ts           # SSR server configuration
+│   └── styles.css          # Global styles
+├── [angular.json](http://_vscodecontentref_/2)            # Angular CLI configuration
+├── [package.json](http://_vscodecontentref_/3)            # Project dependencies and scripts
+├── [tailwind.config.js](http://_vscodecontentref_/4)      # Tailwind CSS configuration
+└── [tsconfig.json](http://_vscodecontentref_/5)           # TypeScript configuration
+```
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular Documentation](https://angular.io/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Angular Material Documentation](https://material.angular.io/)
