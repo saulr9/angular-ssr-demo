@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { map, Observable, switchMap } from 'rxjs';
 import {
   Chain,
@@ -20,8 +21,8 @@ import {
 export class PokemonService {
   private apiUrl = 'https://pokeapi.co/api/v2';
   private readonly STORAGE_CAUGHT_POKEMONS_KEY = 'caughtPokemons';
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
 
   getPokemons(page: number = 1): Observable<PokemonsResponse> {
     const LIMIT = 20;
@@ -95,6 +96,9 @@ export class PokemonService {
   }
 
   public addCaughtPokemon(pokemonId: string): void {
+    if (!this.isBrowser()) {
+      return;
+    }
     const caughtPokemons = this.getCaughtPokemons();
     if (!caughtPokemons.includes(pokemonId)) {
       caughtPokemons.push(pokemonId);
@@ -106,6 +110,9 @@ export class PokemonService {
   }
 
   public removeCaughtPokemon(pokemonId: string): void {
+    if (!this.isBrowser()) {
+      return;
+    }
     const caughtPokemons = this.getCaughtPokemons().filter(
       (id) => id !== pokemonId
     );
@@ -116,6 +123,9 @@ export class PokemonService {
   }
 
   public isPokemonCaught(pokemonId: string): boolean {
+    if (!this.isBrowser()) {
+      return false;
+    }
     return this.getCaughtPokemons().includes(pokemonId);
   }
 
@@ -138,5 +148,9 @@ export class PokemonService {
     chain.evolves_to.forEach((evolution) => {
       this.extractEvolutions(evolution, simplePokemons);
     });
+  }
+
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 }
