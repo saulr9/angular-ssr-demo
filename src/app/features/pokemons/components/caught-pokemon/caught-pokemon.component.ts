@@ -6,8 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { SimplePokemon } from '../../interfaces/pokemons';
-import { PokemonService } from '../../services/pokemon.service';
-import { mapPokemonToSimplePokemon } from '../../utils/pokemon-mapper';
+import { CaughtPokemonService } from '../../services/caught-pokemon.service';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
 @Component({
@@ -19,21 +18,15 @@ import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 export class CaughtPokemonComponent {
   caughtPokemons = signal<SimplePokemon[]>([]);
 
-  private pokemonService = inject(PokemonService);
+  private caughtPokemonService = inject(CaughtPokemonService);
 
   ngOnInit(): void {
-    const caughtPokemonIds = this.pokemonService.getCaughtPokemons();
-    const caughtPokemonDetails: SimplePokemon[] = [];
-
-    caughtPokemonIds.forEach((id) => {
-      this.pokemonService.getPokemonById(id).subscribe((pokemon) => {
-        const simplePokemon = mapPokemonToSimplePokemon(pokemon);
-        caughtPokemonDetails.push(simplePokemon);
-        caughtPokemonDetails.sort(
-          (a, b) => parseInt(a.id, 10) - parseInt(b.id, 10)
-        );
-        this.caughtPokemons.set([...caughtPokemonDetails]);
-      });
+    this.caughtPokemonService.caughtPokemons$.subscribe((pokemons) => {
+      this.caughtPokemons.set(pokemons);
     });
+  }
+
+  pokemonCaughtChange(pokemonId: string): void {
+    this.caughtPokemonService.removeCaughtPokemon(pokemonId);
   }
 }

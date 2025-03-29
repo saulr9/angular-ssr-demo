@@ -1,11 +1,13 @@
 <mat-toolbar class="flex">
   <div class="container mx-auto flex items-center w-full justify-between">
-    <img
-      src="https://th.bing.com/th/id/R.570fcab842fdd7d199a526f2a1e5f0f6?rik=eTEtfQ%2by0pFa2Q&pid=ImgRaw&r=0"
-      width="100"
-      class="max-w-full"
-      alt="PokeAPI"
-    />
+    <a [routerLink]="['/']" class="!capitalize">
+      <img
+        src="https://th.bing.com/th/id/R.570fcab842fdd7d199a526f2a1e5f0f6?rik=eTEtfQ%2by0pFa2Q&pid=ImgRaw&r=0"
+        width="100"
+        class="max-w-full"
+        alt="PokeAPI"
+      />
+    </a>
     <div>
       <ng-container *ngFor="let route of menuRoutes">
         <a

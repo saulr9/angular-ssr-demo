@@ -17,7 +17,6 @@ import { PokemonListComponent } from '../../features/pokemons/components/pokemon
 export default class HomePageComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
-  /*   private platformId = inject(PLATFORM_ID); */
 
   ngOnInit() {
     this.title.setTitle('Home Page');
@@ -28,6 +27,10 @@ export default class HomePageComponent implements OnInit {
     this.meta.addTag({
       name: 'keywords',
       content: 'home, pokédex, pokémon',
+    });
+    this.meta.addTag({
+      property: 'og:image',
+      content: `assets/images/image.png`,
     });
   }
 }

@@ -7,7 +7,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { PokemonService } from '../../services/pokemon.service';
+import { CaughtPokemonService } from '../../services/caught-pokemon.service';
 
 @Component({
   selector: 'app-catch-pokemon',
@@ -21,19 +21,24 @@ export class CatchPokemonComponent implements OnInit {
 
   public pokeballImageUrl = signal<string>('images/pokeball.png');
 
-  private pokemonService = inject(PokemonService);
+  /*   @Output() pokemonCaughtChange = new EventEmitter<string>(); */
+
+  private caughtPokemonService = inject(CaughtPokemonService);
 
   ngOnInit() {
-    this.isCaught.set(this.pokemonService.isPokemonCaught(this.pokemonId()));
+    this.isCaught.set(
+      this.caughtPokemonService.isPokemonCaught(this.pokemonId())
+    );
   }
 
   catchPokemon() {
     const currentState = this.isCaught();
     if (currentState) {
-      this.pokemonService.removeCaughtPokemon(this.pokemonId());
+      this.caughtPokemonService.removeCaughtPokemon(this.pokemonId());
     } else {
-      this.pokemonService.addCaughtPokemon(this.pokemonId());
+      this.caughtPokemonService.addCaughtPokemon(this.pokemonId());
     }
     this.isCaught.set(!currentState);
+    /*     this.pokemonCaughtChange.emit(this.pokemonId()); */
   }
 }
