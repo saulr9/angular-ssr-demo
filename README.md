@@ -2,6 +2,8 @@
 
 This documentation provides essential information for developers working on the Pokémon Angular application. The project is built using Angular CLI, Tailwind CSS, and Angular Material.
 
+Live demo of the application can be found at [https://angular-ssr-demo-nine.vercel.app/pokemons/page/1](https://angular-ssr-demo-nine.vercel.app/pokemons/page/1).
+
 ![alt text](image.png)
 
 ## Table of Contents
